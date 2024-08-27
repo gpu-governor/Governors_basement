@@ -1,5 +1,6 @@
 /*! `markdown` grammar compiled for Highlight.js 11.10.0 */
-var hljsGrammar = (function () {
+  (function(){
+    var hljsGrammar = (function () {
   'use strict';
 
   /*
@@ -252,5 +253,6 @@ var hljsGrammar = (function () {
   return markdown;
 
 })();
-;
-export default hljsGrammar;
+
+    hljs.registerLanguage('markdown', hljsGrammar);
+  })();
