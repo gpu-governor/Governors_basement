@@ -5,8 +5,9 @@ ncurses comes with different function to apply colors to characters in your term
 to check if your terminal supports colors you will use The `has_colors()` function. which returns a logical TRUE if the terminal is able to
 display colored text, FALSE otherwise. (Both TRUE and FALSE are defined in
 NCURSES.H, so don’t fret over them or redefine them in your code.)
-```c
-#include<ncurses.h>
+<pre>
+<code class="language-c">
+#include<ncurses.h >
 int main(){ 
 	initscr();
 	if (has_colors()){
@@ -22,8 +23,8 @@ int main(){
 	getch();
 	endwin();
 }
-```
-
+</code>
+</pre>
 #### Here’s the output I see on my computer:
 Colors: True!
 NCurses reports that you can use 8 colors,
