@@ -4,6 +4,7 @@
     <title>Governor's Basement</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="style.css"/>
+      <link rel="stylesheet" href="highlight/xt256.css"> <!-- Highlight.js theme -->
 </head>
 <body>
     <header class="header">
@@ -51,6 +52,14 @@
       <td>A lightweight immediate mode GUI library.</td>
     </tr>
 </table>
+<pre>
+  <code class="language-c">
+    #include< stdio.h>
+    int main(){
+     printf("hi mom");
+    }
+  </code>
+</pre>
         </div>
     </main>
     
@@ -77,5 +86,7 @@
     <p>GPU Governor, Public Domain &copy;, 2024 - present</p>
     <a>gpu.governor@gmail.com</a>
     </div>
+    <script src="highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
 </body>
 </html>
