@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Governor's Basement</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="../../syntax_highlight/xt256.css"> <!-- Highlight.js theme -->
+</head>
+<body>
+    <header class="header">
+        <a href="#" class="logo">Governor's Basement</a>
+        <nav class="navbar">
+            <p>Support us via</p>
+            <a href="#Contacts"><button>Donations</button></a>
+        </nav>
+    </header>
+    
+    <div class="panel">
+        <nav class="navbar">
+            <a href="#">Ncurses</a>
+            <a href="#">SDL</a>
+            <a href="#">ImGui</a>
+            <a href="#">Pygame</a>
+            <a href="#">Blog</a>
+        </nav>
+    </div>
+
+    <main class="home">
+        <div class="home-content">
+            <h3><strong>Getting Started with ncurses</strong></h3>
+
+            <h4><strong>1. Creating Your First <code>ncurses</code> Program</strong></h4>
+
+            <p>Create a <code>main.c</code> or <code>main.cpp</code> file and open it in your IDE of choice (I personally use Vim and Micro). Copy the code below to your file:</p>
+
+            <pre><code class="language-c">
+#include &lt;ncurses.h&gt;
+
+int main() {
+    initscr();
+    printw("C is the fastest language");
+    refresh(); // Update the screen with the printed output
+    getch();   // Wait for user input
+    endwin();  // End ncurses mode
+    return 0;
+}
+            </code></pre>
+
+            <p>If you compile and run the program, you would see nothing. To compile, if you are using Visual Studio or a similar IDE, add the ncurses library to the linker and click the run button. However, since I am coding in my Linux terminal, I would just run:</p>
+
+            <pre><code class="language-bash">
+gcc main.c -o main -lncurses
+./main
+            </code></pre>
+
+            <p>The program ran successfully but showed no output. The reason is that we did not call the <code>refresh()</code> function after our <code>printw()</code>. The <code>refresh()</code> function is responsible for updating the screen with whatever is to be displayed. Even after adding <code>refresh()</code>, you still wouldn't see anything because the program closes immediately, and the human eye is too slow to see what was displayed.</p>
+
+            <p>To ensure the program waits for us to finish seeing the output, we should add the <code>getch()</code> function after the <code>refresh()</code>. This function <code>getch()</code> (get char) stops and waits for the user to press any key and then stores the key value in memory before proceeding with the program, which then ends.</p>
+
+            <p>So now if you add <code>refresh()</code> and <code>getch()</code> to our <code>main.c</code>, you should see the output.</p>
+
+            <p>Here is another simple "Hello World" <code>ncurses</code> program:</p>
+
+            <pre><code class="language-c">
+#include &lt;ncurses.h&gt;
+
+int main() {
+    initscr();            // Start ncurses mode
+    printw("Hello, world!"); // Print message to the screen
+    refresh();            // Refresh the screen to show the output
+    getch();              // Wait for user input
+    endwin();             // End ncurses mode
+    return 0;
+}
+            </code></pre>
+
+            <ul>
+                <li><strong><code>initscr()</code></strong> is called first to initialize <code>ncurses</code>.</li>
+                <li><strong><code>printw()</code></strong> is used to print a string to the screen.</li>
+                <li><strong><code>refresh()</code></strong> updates the screen with the printed output.</li>
+                <li><strong><code>getch()</code></strong> waits for the user to press a key before exiting.</li>
+                <li><strong><code>endwin()</code></strong> ends <code>ncurses</code> mode.</li>
+            </ul>
+
+            <h3><strong>Conclusion</strong></h3>
+
+            <p>The <code>ncurses</code> library is powerful for creating text-based user interfaces. With basic functions like <code>initscr()</code>, <code>printw()</code>, <code>getch()</code>, and <code>refresh()</code>, you can start building interactive programs in a terminal. Experiment with these functions to get comfortable; we will explore more advanced features like windows, colors, and key handling as you progress.</p>
+        </div>
+    </main>
+    
+    <footer class="footer">
+        <span><a href="#Tut"><button>Main Menu</button></a></span>
+        <span>
+            <a href="#Tut"><button>Previous</button></a>
+            <a href="#Tut"><button>Next</button></a>
+        </span>
+    </footer>
+
+    <div style="text-align: center; margin-top: 50px;">
+        <h3>Stay Connected</h3>
+        <p>Join our community, follow us, and stay updated:</p>
+        <p>
+            <a href="https://discord.gg/YOUR_DISCORD_INVITE" target="_blank">Discord</a> |
+            <a href="https://x.com/YOUR_X_PROFILE" target="_blank">X (Twitter)</a> |
+            <a href="https://github.com/YOUR_GITHUB_PROFILE" target="_blank">GitHub</a> |
+            <a href="https://youtube.com/YOUR_YOUTUBE_CHANNEL" target="_blank">YouTube</a>
+        </p>
+    </div>
+
+    <hr>
+
+    <p>GPU Governor, Public Domain &copy;, 2024 - present</p>
+    <p><a href="mailto:gpu.governor@gmail.com">gpu.governor@gmail.com</a></p>
+
+    <script src="../../syntax_highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+</html>

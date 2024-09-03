@@ -15,7 +15,7 @@ template = template_env.get_template('layout.html')
 
 
 # open markdown article
-with open('format.md') as markdown_file:
+with open('article.md') as markdown_file:
     article=markdown(markdown_file.read())
 
     

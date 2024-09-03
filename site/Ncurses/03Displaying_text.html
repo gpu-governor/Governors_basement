@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Governor's Basement</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    
+    <link rel="stylesheet" href="../../syntax_highlight//xt256.css"> <!-- Highlight.js theme -->
+</head>
+<body>
+    <header class="header">
+        <a href="#" class="logo">Governor's Basement</a>
+        <nav class="navbar">
+        <p>Support us via</p>
+            <a href="#Contacts"><button>Donations</button></a>
+        </nav>
+    </header>
+    
+    <div class="panel">
+        <nav class="navbar">
+            <a href="#">Ncurses</a>
+            <a>SDL</a>
+            <a>ImGui</a>
+            <a>Pygame</a>
+            <a>Blog</a>
+        </nav>
+    </div>
+<main class="home">
+        <div class="home-content">
+            <h3><strong>Displaying Text and Movement</strong></h3>
+            <p>NCurses provides several functions to display text on the screen, allowing you to place text at specific positions, add single characters, or strings. Functions like <code>printw()</code>, <code>mvprintw()</code>, <code>addch()</code>, <code>addstr()</code>, <code>mvaddch()</code>, and <code>mvaddstr()</code> are commonly used.</p>
+
+            <ul>
+                <li>
+                    <p><strong><code>printw()</code></strong>: Prints formatted text at the current cursor position, similar to <code>printf()</code> in standard C.</p>
+                    <p><strong>Example:</strong></p>
+                    <pre><code class="c">printw("Hello, world!");</code></pre>
+                </li>
+            </ul>
+
+            <h4><strong>Adding Characters and Strings: <code>addch()</code>, <code>addstr()</code></strong></h4>
+            <p>These functions give you more precise control over how and where characters or strings are added to the screen.</p>
+
+            <ul>
+                <li>
+                    <p><strong><code>addch(ch)</code></strong>: Adds a single character <code>ch</code> at the current cursor position.</p>
+                    <p><strong>Example:</strong></p>
+                    <pre><code class="c">addch('A');  // Adds the character 'A' at the current cursor position</code></pre>
+                </li>
+                <li>
+                    <p><strong><code>addstr(str)</code></strong>: Adds a string of characters starting at the current cursor position.</p>
+                    <p><strong>Example:</strong></p>
+                    <pre><code class="c">addstr("NCurses is cool!");  // Adds the string at the current cursor position</code></pre>
+                    <p>We will talk about <code>mvprint()</code>, <code>mvaddch()</code>, and <code>mvaddstr()</code> by the end of this current chapter (so you can better understand them).</p>
+                </li>
+            </ul>
+
+            <p>Here's an example demonstrating all the functions:</p>
+
+            <pre><code class="c">
+#include <ncurses.h>
+
+int main() {
+    initscr();              // Start ncurses mode
+
+    printw("Normal Text");  // Print text at the current position
+    addch('A');             // Add single character
+    addstr(" Adding a string here.");  // Add string at the current position
+
+    refresh();              // Update the screen with changes
+    getch();                // Wait for a key press
+    endwin();               // End ncurses mode
+    return 0;
+}
+            </code></pre>
+
+            <p>This example covers all the basic ways to display text and characters using NCurses. </p>
+
+            <hr>
+
+            <h4><strong>Moving the Cursor: <code>move(y, x)</code></strong></h4>
+
+            <ul>
+                <li><strong><code>move(y, x)</code></strong>: Moves the cursor to a specific position on the screen. <code>y</code> is the row (starting from 0 at the top) and <code>x</code> is the column (starting from 0 on the left).</li>
+            </ul>
+
+            <p><strong>Example:</strong></p>
+            <pre><code class="c">
+#include <ncurses.h>
+
+int main() {
+    initscr();
+    move(0, 8);              // Moves the cursor to row 0, column 8
+    printw("I am Here!");    // Prints "I am Here!" at the new position
+    refresh();
+    getch();
+    endwin();
+    return 0;
+}
+            </code></pre>
+
+            <p><strong>Now that we understand the move function, let's talk about:</strong></p>
+<p>The <code>mvprint()</code>, <code>mvaddch()</code>, and <code>mvaddstr()</code> functions</p>
+            <p><strong><code>mvprintw(y, x, ...)</code></strong>: Combines <code>move()</code> and <code>printw()</code>. It moves the cursor to <code>(y, x)</code> and prints the string in one function call.</p>
+            <p><strong>Example:</strong></p>
+            <pre><code class="c">mvprintw(3, 5, "Positioned Text");  // Moves to (3, 5) and prints "Positioned Text"</code></pre>
+
+            <ul>
+                <li>
+                    <p><strong><code>mvaddch(y, x, ch)</code></strong>: Moves the cursor to <code>(y, x)</code> and adds a single character <code>ch</code> there.</p>
+                    <p><strong>Example:</strong></p>
+                    <pre><code class="c">mvaddch(2, 3, 'B');  // Moves to (2, 3) and adds the character 'B'</code></pre>
+                </li>
+                <li>
+                    <p><strong><code>mvaddstr(y, x, str)</code></strong>: Moves the cursor to <code>(y, x)</code> and adds a string starting from that position.</p>
+                    <p><strong>Example:</strong></p>
+                    <pre><code class="c">mvaddstr(4, 5, "Hello NCurses!");  // Moves to (4, 5) and prints the string</code></pre>
+                </li>
+            </ul>
+
+            <p>Here's a simple program demonstrating <code>mvprintw()</code>, <code>mvaddch()</code>, and <code>mvaddstr()</code>:</p>
+
+            <pre><code class="c">
+#include <ncurses.h>
+
+int main() {
+    initscr();  // Start ncurses mode
+
+    mvprintw(0, 0, "Hello at (0,0)!");   // Print text at row 0, column 0
+    mvaddch(1, 5, '@');                  // Add character '@' at row 1, column 5
+    mvaddstr(2, 10, "NCurses Example!"); // Add string at row 2, column 10
+
+    refresh();  // Update the screen with changes
+    getch();    // Wait for a key press
+    endwin();   // End ncurses mode
+    return 0;
+}
+            </code></pre>
+
+            <h3><strong>Summary</strong></h3>
+            <p>NCurses provides a powerful set of functions for handling text and user input in terminal-based programs. The key functions covered here allow you to print formatted text (<code>printw()</code>), add single characters (<code>addch()</code>) or strings (<code>addstr()</code>), and move the cursor to specific screen positions with the <code>move()</code> function. The <code>mv</code> variants like <code>mvprintw()</code>, <code>mvaddch()</code>, and <code>mvaddstr()</code> combine moving the cursor and displaying content in a single call, which simplifies the code when both positioning and text output are needed. Remember to always call <code>refresh()</code> to update the display after making changes, and use <code>getch()</code> to wait for user input before ending the program. <a href="#">Next lesson</a></p>
+        </div>
+    </main>
+
+    
+        <footer class="footer">
+          <span> <a href="#Tut"><button>main menu</button></a></span>
+           <span> 
+           <a href="#Tut"><button>Previous</button></a>
+            <a href="#Tut"><button>Next</button></a>
+            </span>
+    </footer>
+    <div>
+      <div style="text-align: center; margin-top: 50px;">
+    <h3>Stay Connected</h3>
+    <p>Join our community, follow us, and stay updated:</p>
+    
+    <p>
+        <a href="https://discord.gg/YOUR_DISCORD_INVITE" target="_blank">Discord</a> |
+        <a href="https://x.com/YOUR_X_PROFILE" target="_blank">X (Twitter)</a> |
+        <a href="https://github.com/YOUR_GITHUB_PROFILE" target="_blank">GitHub</a> |
+        <a href="https://youtube.com/YOUR_YOUTUBE_CHANNEL" target="_blank">YouTube</a>
+    </p>
+</div>
+      <hr>
+    <p>GPU Governor, Public Domain &copy;, 2024 - present</p>
+    <a>gpu.governor@gmail.com</a>
+    </div>
+        <script src="../../syntax_highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+</html>
