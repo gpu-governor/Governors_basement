@@ -142,8 +142,3 @@ table {
    img1{
      object-fit: contain; /* cover or contain */
    }
-   
-   /* bound */
-   .bound{
-     background: pink;
-   }

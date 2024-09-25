@@ -33,10 +33,10 @@
 
 <h3>installation</h3>
 
-<p>this tutorial is current with NCurses version 5.5.+. We assumes that you’re using a UNIX-like operating system (Linux,
+<p>this tutorial is current with NCurses version 5.5.+. I assumes that you’re using a UNIX-like operating system (Linux,
 FreeBSD, Mac OS X, or some other OS based on UNIX), but you can windows as well via Cygwin.
-I assume you can setup a project in your IDE of choice in order to get the code to run. Those kinds of instructions get out of date quickly so i wouldn't cover them in details.
-To install <code>ncurses</code>, follow these steps based on your operating system:</p>
+I also assume you can setup a project in your IDE of choice in order to get the code to run. Those kinds of instructions get out of date quickly so i wouldn't cover them in details.
+To install <code class="bound">ncurses</code>, follow these steps based on your operating system:</p>
 
 <h4><strong>On Linux:</strong></h4>
 
@@ -45,18 +45,27 @@ To install <code>ncurses</code>, follow these steps based on your operating syst
 
 <ul>
 <li><strong>Debian/Ubuntu:</strong>
-<code>bash
+<pre>
+<code class="language-shell">
 sudo apt-get update
 sudo apt-get install libncurses5-dev libncursesw5-dev
-</code></li>
+</code>
+</pre>
+</li>
 <li><strong>Fedora:</strong>
-<code>bash
+<pre>
+<code class="language-shell">
 sudo dnf install ncurses-devel
-</code></li>
+</code>
+</pre>
+</li>
 <li><strong>Arch Linux:</strong>
-<code>bash
+<pre>
+<code class="language-shell">
 sudo pacman -S ncurses
-</code></li>
+</code>
+</pre>
+</li>
 </ul></li>
 <li><p><strong>From source:</strong>
 If you need the latest version or a custom build:</p>
@@ -69,7 +78,7 @@ tar -xvzf ncurses-&lt;version&gt;.tar.gz
 cd ncurses-&lt;version&gt;/
 </code></li>
 <li>Configure, compile, and install:
-<pre><code class="language-c">bash
+<pre><code class="language-shell">
 ./configure
 make
 sudo make install
@@ -81,9 +90,12 @@ sudo make install
 
 <ol>
 <li><p><strong>Using Homebrew:</strong>
-<code>bash
+<pre>
+<code class="language-shell">
 brew install ncurses
-</code></p></li>
+</code>
+</pre>
+</p></li>
 <li><p><strong>From source:</strong></p>
 
 <ul>
@@ -105,9 +117,12 @@ brew install ncurses
 
 <ul>
 <li>Install it in your Linux distribution inside WSL as you would on a regular Linux system:
-<code>bash
+<pre>
+<code class="language-shell">
 sudo apt-get install libncurses5-dev libncursesw5-dev
-</code></li>
+</code>
+</pre>
+</li>
 </ul></li>
 </ul>
 

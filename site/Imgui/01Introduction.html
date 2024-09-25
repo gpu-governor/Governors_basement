@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Governor's Basement</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    
+    <link rel="stylesheet" href="../../syntax_highlight//xt256.css"> <!-- Highlight.js theme -->
+</head>
+<body>
+    <header class="header">
+        <a href="#" class="logo">Governor's Basement</a>
+        <nav class="navbar">
+        <p>Support us via</p>
+            <a href="#Contacts"><button>Donations</button></a>
+        </nav>
+    </header>
+    
+    <div class="panel">
+        <nav class="navbar">
+            <a href="#">Ncurses</a>
+            <a>SDL</a>
+            <a>ImGui</a>
+            <a>Pygame</a>
+            <a>Blog</a>
+        </nav>
+    </div>
+
+    <main class="home">
+        <div class="home-content">
+          <h5><i>Last updated: 12/5/24</i></h5>
+          <hr>
+          <h1>Introduction</h1>
+
+<p>Graphical User Interfaces (GUIs) are essential in making software interactive and user-friendly. They provide a visual way for users to interact with the system, as opposed to text-based interfaces. GUIs can be categorized into two primary modes: Retained Mode and Immediate Mode.</p>
+
+<h3>Retained Mode vs Immediate Mode GUI</h3>
+
+<p><strong>Retained Mode GUI:</strong>
+- <strong>Definition:</strong> In a retained mode GUI, the GUI framework retains the state of the interface elements. You define the structure and properties of your GUI elements (like windows, buttons, etc.), and the framework manages their rendering, event handling, and state changes.
+- <strong>Example Libraries:</strong> Qt, GTK, Wxwidgets, Tkinter.</p>
+
+<p><strong>Pros:</strong>
+  - Easier to maintain state across frames.
+  - Typically has a more structured approach, which can be easier to manage in larger applications.
+  - Often includes more built-in features and widgets.</p>
+
+<p><strong>Cons:</strong>
+  - Can be less flexible for highly dynamic interfaces.
+  - Can be more complex to use, requiring more boilerplate code.</p>
+
+<p><strong>Immediate Mode GUI:</strong>
+- <strong>Definition:</strong> In an immediate mode GUI, the state of the GUI elements is not retained by the framework. Instead, you explicitly draw the GUI elements each frame, based on the current state of your application.
+- <strong>Example Libraries:</strong> ImGui, Nuklear, RayGui.</p>
+
+<p><strong>Pros:</strong>
+  - Highly flexible and suitable for dynamic interfaces.
+  - Simplified state management as the entire GUI is re-rendered each frame.
+  - Typically easier to integrate into game engines or other real-time applications.</p>
+
+<p><strong>Cons:</strong>
+  - Can be more challenging to manage complex states.
+  - Performance can be an issue for very large and complex UIs, though this is mitigated by efficient implementations like ImGui.</p>
+
+<h3>What are Backends (Graphics APIs and Libraries)</h3>
+
+<p>In the context of GUI libraries, backends refer to the underlying systems responsible for rendering the GUI and handling input events. These backends can vary based on the platform and the rendering technology used.</p>
+
+<p><strong>Graphics APIs:</strong>
+- <strong>OpenGL:</strong> A cross-platform graphics API that is widely used for rendering 2D and 3D graphics. Many GUI libraries, including ImGui, can use OpenGL as a backend.
+- <strong>DirectX:</strong> A collection of APIs developed by Microsoft, primarily used for rendering 2D and 3D graphics on Windows.
+- <strong>Vulkan:</strong> A low-overhead, cross-platform API designed for high-performance 3D graphics applications.</p>
+
+<p><strong>Libraries:</strong>
+- <strong>SDL (Simple DirectMedia Layer):</strong> A cross-platform development library that provides low-level access to audio, keyboard, mouse, joystick, and graphics hardware. It can be used as a backend for GUI libraries to handle window creation, input, and rendering.
+- <strong>Allegro:</strong> Another cross-platform library similar to SDL, providing modules for handling windowing, graphics, audio, and networking.
+- <strong>GLFW:</strong> A library specifically designed for creating windows with OpenGL contexts and handling input.</p>
+
+<p><strong>Choosing a Backend:</strong>
+The choice of backend depends on the requirements of your application, the platforms you are targeting, and the specific features you need.
+- For cross-platform compatibility, OpenGL combined with SDL or GLFW is a common choice.
+- For Less external Dependencies and easy integration, using SDL only is ideal [Backend+window].
+- For a more modern cross platform aproach, Vulkan combined with SDL or GLFW is a common choice.
+- For applications targeting only Windows, DirectX might be preferred due to its tight integration with the Windows operating system.</p>
+
+<p>By understanding these concepts, you can make informed decisions when designing and implementing GUI systems for your applications. Whether you choose retained mode for its structured approach or immediate mode for its flexibility, and which backend to use, will depend on your specific needs and the context of your project.</p>
+
+<h3>In this Tutorials</h3>
+
+<p>we will teach imgui :</p>
+<ul>
+  
+<li>Generally without a specific backend</li>
+<li>with glfw + OpenGL</li>
+<li> with sdl2 + OpenGL</li>
+<li>with glfw + vulkan</li>
+<li> with sdl2 + sdl2 backend</li>
+<li>with sdl3</li>
+</ul>
+
+<p><a href="introduction.md">Return to Main menu</a></p>
+
+        </div>
+    </main>
+    
+        <footer class="footer">
+          <span> <a href="#Tut"><button>main menu</button></a></span>
+           <span> 
+           <a href="#Tut"><button>Previous</button></a>
+            <a href="#Tut"><button>Next</button></a>
+            </span>
+    </footer>
+    <div>
+      <div style="text-align: center; margin-top: 50px;">
+    <h3>Stay Connected</h3>
+    <p>Join our community, follow us, and stay updated:</p>
+    
+    <p>
+        <a href="https://discord.gg/YOUR_DISCORD_INVITE" target="_blank">Discord</a> |
+        <a href="https://x.com/YOUR_X_PROFILE" target="_blank">X (Twitter)</a> |
+        <a href="https://github.com/YOUR_GITHUB_PROFILE" target="_blank">GitHub</a> |
+        <a href="https://youtube.com/YOUR_YOUTUBE_CHANNEL" target="_blank">YouTube</a>
+    </p>
+</div>
+      <hr>
+    <p>GPU Governor, Public Domain &copy;, 2024 - present</p>
+    <a>gpu.governor@gmail.com</a>
+    </div>
+        <script src="../../syntax_highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+</html>

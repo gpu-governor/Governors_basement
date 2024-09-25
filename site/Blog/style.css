@@ -126,7 +126,12 @@ table {
             text-align: center;
         }
    
-   
+   /* 00blog specific style */
+  .outlined-div {
+    outline: 2px solid pink; /* outline thickness, style, and color */
+  }
+  
+  
    /* img */
    .card{
      width: 300px;
@@ -141,9 +146,4 @@ table {
    
    img1{
      object-fit: contain; /* cover or contain */
-   }
-   
-   /* bound */
-   .bound{
-     background: pink;
    }

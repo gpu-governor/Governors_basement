@@ -140,10 +140,12 @@ table {
    }
    
    img1{
-     object-fit: contain; /* cover or contain */
+     object-fit: cover; /* cover or contain */
    }
+   
    
    /* bound */
    .bound{
      background: pink;
+     color:black;
    }
