@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Governor's Basement</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    
+    <link rel="stylesheet" href="../../syntax_highlight//xt256.css"> <!-- Highlight.js theme -->
+</head>
+<body>
+    <header class="header">
+        <a href="#" class="logo">Governor's Basement</a>
+        <nav class="navbar">
+        <p>Support us via</p>
+            <a href="#Contacts"><button>Donations</button></a>
+        </nav>
+    </header>
+    
+    <div class="panel">
+        <nav class="navbar">
+            <a href="#">Ncurses</a>
+            <a>SDL</a>
+            <a>ImGui</a>
+            <a>Pygame</a>
+            <a>Blog</a>
+        </nav>
+    </div>
+
+    <main class="home">
+        <div class="home-content">
+          <h5><i>Last updated: 12/5/24</i></h5>
+          <hr>
+          <h1>Imgui Basics</h1>
+
+<p>Before We setup imgui for specific backend we will learn basic concept of imgui without a backend.</p>
+
+<p>Let's assume Imgui is already installed.</p>
+
+<h2>step 1:</h2>
+
+<p>create a file named <code>fake_imgui.cpp</code></p>
+
+<h2>step 2:</h2>
+
+<p>in every C++ program we will have to include necessary files and libraries, so in our <code>fake_imgui.cpp</code> we will include:</p>
+
+<pre>
+<code class="language-cpp">
+// include Imgui files
+#include "imgui.h"
+#include "imgui_impl_backend.h"
+#include "imgui_impl_backend.h"
+// include backend
+#include< backend.h>
+</code>
+</pre>
+
+<p>as you see above, where we include backend will depend on the backend (graphics lib) you are using, if you are using SDL+Direct11 for example:</p>
+
+<pre>
+<code class="language-cpp">
+#include "imgui.h"
+#include "imgui_impl_sdl2.h"
+#include "imgui_impl_dx11.h"
+#include < d3d11.h>
+#include < stdio.h>
+#include < SDL.h>
+#include < SDL_syswm.h>
+</code>
+</pre>
+
+<p>or if you are using Vulkan+glfw you will include:</p>
+
+<pre>
+<code class="language-cpp">
+#include "imgui.h"
+#include "imgui_impl_glfw.h"
+#include "imgui_impl_vulkan.h"
+#include <stdio.h>          // printf, fprintf
+#include <stdlib.h>         // abort
+#define GLFW_INCLUDE_NONE
+#define GLFW_INCLUDE_VULKAN
+#include <GLFW/glfw3.h>
+
+// Volk headers
+#ifdef IMGUI_IMPL_VULKAN_USE_VOLK
+#define VOLK_IMPLEMENTATION
+#include <volk.h>
+#endi
+</code>
+</pre>
+
+<p>but for this tutorial, just leave <code>#include&lt; backend.h&gt;</code> as is</p>
+
+<h2>step 3:</h2>
+
+<p>as every normal c++ program, you would create a main function:</p>
+
+<pre>
+<code class="language-cpp">
+#include "imgui.h"
+#include "imgui_impl_backend.h"
+#include "imgui_impl_backend.h"
+#include< backend.h>
+
+int main(){
+  // TODO
+  return 0;
+}
+</code>
+</pre>
+
+<p>next you would want to initialize your backend and create a window in your main function:</p>
+
+<pre>
+<code class="language-cpp">
+int main(){
+  create_window(win,"imgui",640,480);
+  //TODO: Setup Dear ImGui context
+
+  bool quit= true;
+  while(quit){
+    // TODO: imgui rendering
+
+  }
+
+  destroy_window(win);
+  return 0;
+}
+</code>
+</pre>
+
+<p>in the above we used an imaginery graphics library scheme (that does not exist). But however, the process is the same for any backend, wether you use Vulkan, Opengl or DirectX you will have to initialize it, create a window, create a Game loop and then de-intialize it.</p>
+
+<h2>step 4:</h2>
+
+<p>since we have our imaginery backend setuped, we can then initialize imgui and start drawing:</p>
+
+<pre>
+<code class="language-cpp">
+int main(){
+  create_window(win,"imgui",640,480);
+  //Setup Dear ImGui context
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+
+    // Setup Dear ImGui style
+    ImGui::StyleColorsDark();
+    //ImGui::StyleColorsLight();
+
+    // Setup Platform/Renderer backends
+    ImGui_Impl_InitForBackend(window, renderer);
+    ImGui_Impl_Renderer_Init(renderer);
+
+  bool quit= true;
+  while(quit){
+    // TODO: imgui rendering
+
+  }
+
+  destroy_window(win);
+  return 0;
+}
+</code>
+</pre>
+
+<p>the added lines of code for imgui context Setup checks the imgui version, create context, enable keyboard, enable gamepad, ...
+and then we set imgui Theme to Dark and we then setup the Platform backend, note that the platform backend setup varies to the specific backend you are using.</p>
+
+<h2>Step 5: Drawing a Simple ImGui Window</h2>
+
+<p>In this step, we’ll focus solely on drawing a basic ImGui window within the main loop.</p>
+
+<pre>
+ <code class="language-cpp">
+    while (!quit) {
+        // Start the ImGui frame
+        ImGui<em>Impl</em>NewFrameBackend();  // Start new frame for backend
+        ImGui::NewFrame();             // Start ImGui frame</p>
+
+<p>// Draw ImGui window and text
+        ImGui::Begin("Hello, ImGui!");           // Create a new window
+        ImGui::Text("This is some text!");       // Display some text inside the window
+        ImGui::End();                            // End the window</p>
+
+<p>// Rendering
+        ImGui::Render();  // Collect all ImGui draw commands
+        ImGui<em>Impl</em>Renderer_RenderDrawData(ImGui::GetDrawData()); // Render the ImGui data</p>
+
+<p>// TODO : handing events (we will cover this next chapter)</p>
+
+<p>present<em>backend</em>frame();      // Custom function to display the rendered frame
+    }</p>
+
+// TODO Continue to Step 6 for cleanup
+    return 0;
+}
+ </code>
+ </pre>
+
+<p>Explanation:
+we have populated our loop with codes, let's break down everything we did  in simple terms:</p>
+
+<ol>
+<li><p>while (!quit): This is a loop that keeps running until you tell the program to stop (i.e., quit becomes true). The loop keeps things active, allowing your app to keep updating and drawing.</p></li>
+<li><p>ImGui<em>Impl</em>NewFrameBackend(): This function prepares the backend (whatever system you're using, like SDL, OpenGL, etc.) to start a new frame. Think of it as clearing the drawing board for the next picture you're going to paint.</p></li>
+<li><p>ImGui::NewFrame(): This starts a new ImGui frame, meaning you’re telling ImGui, "I'm going to create some UI elements for this frame."</p></li>
+<li><p>ImGui::Begin("Hello, ImGui!"): This opens up a new window in your UI. It's like saying, "Start drawing a window titled 'Hello, ImGui!'"</p></li>
+<li><p>ImGui::Text("This is some text!"): Inside that window, you're displaying the text "This is some text!". It's like adding a label inside the window.</p></li>
+<li><p>ImGui::End(): This closes the window. You're done adding things to this window for now.</p></li>
+<li><p>ImGui::Render(): Now that you've told ImGui what to display (a window with text), this step prepares everything for drawing. It figures out where and how to display what you created.</p></li>
+<li><p>ImGui<em>Impl</em>Renderer_RenderDrawData(ImGui::GetDrawData()): This sends the prepared ImGui drawing commands to the actual rendering system. It’s like handing your instructions to the painter to start painting on the canvas.</p></li>
+<li><p>present<em>backend</em>frame(): Another custom function, which takes the painted canvas (your UI) and shows it on the screen. It's like flipping the canvas over for everyone to see.</p></li>
+</ol>
+
+<p>And the loop keeps going, updating and drawing the UI until the user decides to quit.</p>
+
+<p>Finally, once you exit the loop, you’d go to step 7, which would be cleaning up and closing things down properly.</p>
+
+<hr />
+
+<h2>Step 6 : Cleanup</h2>
+
+<p>After the main loop is done (i.e., when the user decides to quit the application), it’s important to clean up ImGui and the backend.</p>
+
+<pre>
+<code class="language-cpp">
+int main() {
+    // Setup code as in Step 5...
+
+    bool quit = false;
+    while (!quit) {
+        // ImGui frame and rendering as in Step 5...
+    }
+
+    // Cleanup
+    ImGui_Impl_Renderer_Shutdown();      // Cleanup the Renderer backend
+    ImGui_Impl_ShutdownForBackend();     // Cleanup the Platform backend
+    ImGui::DestroyContext();             // Destroy ImGui context
+    destroy_window(win);                 // Destroy the window and backend
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Explanation:</p>
+
+<ol>
+<li>ImGui Cleanup:</li>
+</ol>
+
+<p>ImGui<em>Impl</em>Renderer_Shutdown() cleans up the renderer backend.</p>
+
+<p>ImGui<em>Impl</em>ShutdownForBackend() shuts down the platform-specific backend (e.g., SDL, GLFW).</p>
+
+<p>ImGui::DestroyContext() destroys the ImGui context, freeing any resources allocated by ImGui.</p>
+
+<ol start="2">
+<li>Backend Cleanup:</li>
+</ol>
+
+<p>The destroy_window(win) function (or its equivalent for your backend) cleans up the window and any other resources specific to your graphics library.</p>
+
+        </div>
+    </main>
+    
+        <footer class="footer">
+          <span> <a href="#Tut"><button>main menu</button></a></span>
+           <span> 
+           <a href="#Tut"><button>Previous</button></a>
+            <a href="#Tut"><button>Next</button></a>
+            </span>
+    </footer>
+    <div>
+      <div style="text-align: center; margin-top: 50px;">
+    <h3>Stay Connected</h3>
+    <p>Join our community, follow us, and stay updated:</p>
+    
+    <p>
+        <a href="https://discord.gg/YOUR_DISCORD_INVITE" target="_blank">Discord</a> |
+        <a href="https://x.com/YOUR_X_PROFILE" target="_blank">X (Twitter)</a> |
+        <a href="https://github.com/YOUR_GITHUB_PROFILE" target="_blank">GitHub</a> |
+        <a href="https://youtube.com/YOUR_YOUTUBE_CHANNEL" target="_blank">YouTube</a>
+    </p>
+</div>
+      <hr>
+    <p>GPU Governor, Public Domain &copy;, 2024 - present</p>
+    <a>gpu.governor@gmail.com</a>
+    </div>
+        <script src="../../syntax_highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+</html>

@@ -149,3 +149,17 @@ table {
      background: pink;
      color:black;
    }
+   
+   
+     
+   
+   
+   
+ pre {
+    max-height: auto; /* Adjust the height as needed */
+    overflow: auto;    /* Enables scrolling */
+    white-space: pre-wrap; /* Optional: wraps the text if necessary */
+    word-wrap: break-word; /* Optional: breaks long words */
+    padding: 5px; /* Optional: add some padding for better look */
+   /* border: 1px solid #ddd; */ /* Optional: border for styling */
+}
