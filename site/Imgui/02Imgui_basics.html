@@ -178,22 +178,22 @@ and then we set imgui Theme to Dark and we then setup the Platform backend, note
  <code class="language-cpp">
     while (!quit) {
         // Start the ImGui frame
-        ImGui<em>Impl</em>NewFrameBackend();  // Start new frame for backend
+        ImGui_Impl_NewFrameBackend();  // Start new frame for backend
         ImGui::NewFrame();             // Start ImGui frame</p>
 
-<p>// Draw ImGui window and text
+// Draw ImGui window and text
         ImGui::Begin("Hello, ImGui!");           // Create a new window
         ImGui::Text("This is some text!");       // Display some text inside the window
         ImGui::End();                            // End the window</p>
 
-<p>// Rendering
+// Rendering
         ImGui::Render();  // Collect all ImGui draw commands
-        ImGui<em>Impl</em>Renderer_RenderDrawData(ImGui::GetDrawData()); // Render the ImGui data</p>
+        ImGui_Impl_Renderer_RenderDrawData(ImGui::GetDrawData()); // Render the ImGui data
 
-<p>// TODO : handing events (we will cover this next chapter)</p>
+// TODO : handing events (we will cover this next chapter)
 
-<p>present<em>backend</em>frame();      // Custom function to display the rendered frame
-    }</p>
+present_backend_frame();      // Custom function to display the rendered frame
+    }
 
 // TODO Continue to Step 6 for cleanup
     return 0;

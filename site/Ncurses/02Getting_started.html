@@ -47,18 +47,18 @@ int main() {
 }
             </code></pre>
 
-            <p>If you compile and run the program, you would see nothing. To compile, if you are using Visual Studio or a similar IDE, add the ncurses library to the linker and click the run button. However, since I am coding in my Linux terminal, I would just run:</p>
+            <p>If you compile and run the program, you would see <code class="bound">nothing</code>. To compile, if you are using Visual Studio or a similar IDE, add the ncurses library to the linker and click the run button. However, since I am coding in my Linux terminal, I would just run:</p>
 
             <pre><code class="language-bash">
 gcc main.c -o main -lncurses
 ./main
             </code></pre>
 
-            <p>The program ran successfully but showed no output. The reason is that we did not call the <code>refresh()</code> function after our <code>printw()</code>. The <code>refresh()</code> function is responsible for updating the screen with whatever is to be displayed. Even after adding <code>refresh()</code>, you still wouldn't see anything because the program closes immediately, and the human eye is too slow to see what was displayed.</p>
+            <p>The program ran successfully but showed no output. The reason is that we did not call the <code class="bound">refresh()</code> function after our <code class="bound">printw()</code>.<br> The <code class="bound">refresh()</code> function is responsible for updating the screen with whatever is to be displayed. Even after adding <code class="bound">refresh()</code>, you still wouldn't see anything because the program closes immediately, and the human eye is too slow to see what was displayed.</p>
 
-            <p>To ensure the program waits for us to finish seeing the output, we should add the <code>getch()</code> function after the <code>refresh()</code>. This function <code>getch()</code> (get char) stops and waits for the user to press any key and then stores the key value in memory before proceeding with the program, which then ends.</p>
+            <p>To ensure the program waits for us to finish seeing the output, we should add the <code class="bound">getch()</code> function after the <code class="bound">refresh()</code>. This function <code class="bound">getch()</code> (get char) stops and waits for the user to press any key and then stores the key value in memory before proceeding with the program, which then ends.</p>
 
-            <p>So now if you add <code>refresh()</code> and <code>getch()</code> to our <code>main.c</code>, you should see the output.</p>
+            <p>So now if you add <code class="bound">refresh()</code> and <code class="bound">getch()</code> to our <code>main.c</code>, you should see the output.</p>
 
             <p>Here is another simple "Hello World" <code>ncurses</code> program:</p>
 
